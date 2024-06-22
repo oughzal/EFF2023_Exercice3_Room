@@ -25,14 +25,15 @@ class EnregistrerActivity : AppCompatActivity() {
         numV.text = num.toString()
 
         btnEnregistrer.setOnClickListener {
-            val num : Int = numV.text.toString().toInt()
-            val type : String = typeCarburant.text.toString()
-            val qteVendue : Int = qteVendue.text.toString().toInt()
-            val vente = Vente(num,type,qteVendue)
+
             AlertDialog.Builder(this)
                 .setTitle("Confirmation")
                 .setMessage("Voulez-vous vraiment ajouter cette vente ?")
                 .setPositiveButton("Oui") { dialog, which ->
+                    val num : Int = numV.text.toString().toInt()
+                    val type : String = typeCarburant.text.toString()
+                    val qteVendue : Int = qteVendue.text.toString().toInt()
+                    val vente = Vente(num,type,qteVendue)
                     lifecycleScope.launch {
                         val venteDao = AccessDB.getInstance(applicationContext).venteDao()
                         venteDao.ajouterVente(vente)
