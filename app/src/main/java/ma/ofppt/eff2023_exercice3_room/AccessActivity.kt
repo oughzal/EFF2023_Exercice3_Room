@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class AccessActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class AccessActivity : AppCompatActivity() {
         btnValider.setOnClickListener {
 
                 val numV = numV.text.toString().toInt()
-            lifecycleScope.launch(Dispatchers.IO) {
+            GlobalScope.launch(Dispatchers.IO) {
                 val venteDao = AccessDB.getInstance(applicationContext).venteDao()
                 val vente = venteDao.rechercher(numV)
                 if (vente == null) {
